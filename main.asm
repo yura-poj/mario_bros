@@ -44,19 +44,23 @@ rsect main
 move_mario: ext
 move_enemies: ext
 set_coordinates: ext
+get_triggers: ext
+
+
 main>
   ldi r0, 0x0001
   ldi r1, 0xfff0
   ldi r2, 0xfff1
-  ldi r3, 0x0005
-  stb r1, r3
-  stb r2, r3
+  ldi r3, 0x0002
+  st r1, r3
+  st r2, r3
   jsr set_coordinates
   while 
     tst r0
   stays gt
     jsr move_mario
     jsr move_enemies
+    #jsr get_triggers
   wend
 
   halt
