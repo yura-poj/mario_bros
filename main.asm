@@ -48,7 +48,7 @@ main>
   ldi r0, 0x0001
   ldi r1, 0xfff0
   ldi r2, 0xfff1
-  ldi r3, 0x0001
+  ldi r3, 0x0005
   stb r1, r3
   stb r2, r3
   jsr set_coordinates
