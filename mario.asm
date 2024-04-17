@@ -67,12 +67,14 @@ move_mario>
     fi
 
     #decrise y of mario
+    ldi r5, 0x0000
     if
       cmp r3, r2
     is gt
       #i f map
       ldi r1, 0xffff
       add r1,r3
+      ldi r5 , 0x0001 #set r5 for trigger
     fi
 
     ldi r5, 0xfff1 # mario y

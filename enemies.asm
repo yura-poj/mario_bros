@@ -4,7 +4,7 @@ set_coordinates>
   push r0
 
   ldi r0, 0xfff2
-  ldi r1, 0xfffc
+  ldi r1, 0xfffa
   ldi r2, 0x0020
   ldi r3, 0x0009
   ldi r4, 0x001f
@@ -23,7 +23,7 @@ rts
 move_enemies>
   push r0
   ldi r0, 0xfff2
-  ldi r1, 0xfffc
+  ldi r1, 0xfffa
 
   while
     cmp r0, r1
