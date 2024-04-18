@@ -40,7 +40,7 @@ get_triggers>
         tst r0
       is gt #mario kill enemy
         jsr inc_points
-        ldi r2, 0x0002
+        ldi r2, 0x0001
         sub r1, r2
         
         ldi r5, 0x002e

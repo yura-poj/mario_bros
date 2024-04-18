@@ -58,9 +58,9 @@ main>
     tst r0  
   stays gt
     jsr inc_points
-    jsr move_mario
     jsr move_earth_enemies
     jsr move_sky_enemies
+    jsr move_mario
     jsr get_triggers
   wend
 
