@@ -17,7 +17,7 @@
         "debug": "${workspaceFolder}/build/out.dbg.json"
       },
       "sources": [
-        "mario.asm","enemies.asm", "trigger.asm","main.asm"
+        "mario.asm", "map.asm", "enemies.asm", "trigger.asm","main.asm"
       ]
     }
 

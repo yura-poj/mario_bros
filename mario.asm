@@ -1,5 +1,8 @@
 rsect mario
 
+check_pixel: ext
+move_map: ext
+
 move_mario>
   push r0
 
@@ -32,11 +35,18 @@ move_mario>
     fi
 
     ldi r4, 0x0001
-    if #check for x bigger 0
+    if #check for x bigger 1
       cmp r2, r4
     is lt
       sub r2, r0
       move r0, r2
+    fi
+
+    ldi r4, 0x0010
+    if #check for x >= halh of map
+      cmp r2, r4
+    is ge
+      jsr move_map
     fi
 
     ldi r4, 0xff00 # mario x
@@ -44,18 +54,29 @@ move_mario>
 
 
     ldi r2, 0x0001
-    #check y 
+    #check y = 1
     if
       cmp r1, r2
     is eq
       if
         cmp r3, r2
       is eq
-        #i f map
-        ldi r6, 0x0001
-      fi 
+        jsr set_up_r6
+      fi
+      #check y - 1= map
+      ldi r5, 0xff00 #mario x
+      ld r5,r5
+      ldi r7, 0xff00 #mario y
+      ld r7, r7
+      dec r7
+      jsr check_pixel
+      if
+        tst r7
+      is gt
+        jsr set_up_r6
+      fi
     fi
-    
+
     #set r6 = 0 if r6 =4
     ldi r1, 0x0004
     if
@@ -78,10 +99,20 @@ move_mario>
     if
       cmp r3, r2
     is gt
+      ldi r5, 0xff00 #mario x
+      ld r5,r5
+      ldi r7, 0xff00 #mario y
+      ld r7, r7
+      dec r7
+      jsr check_pixel
       #i f map
-      ldi r1, 0xffff
-      add r1,r3
-      ldi r5 , 0x0001 #set r5 for trigger
+      if # if r7 > 0 
+        tst r7
+      is le #fall if doesnt have map
+        ldi r1, 0xffff
+        add r1,r3
+        ldi r5 , 0x0001 #set r5 for trigger
+      fi
     fi
 
     ldi r5, 0xff01 # mario y
@@ -90,5 +121,20 @@ move_mario>
 
     rts
 
+set_up_r6:
+  ldi r5, 0xff00 #mario x
+  ld r5,r5
+  ldi r7, 0xff00 #mario y + 3
+  ldi r2, 3
+  ld r7, r7
+  add r2,r7
+  #i f map
+  if
+    tst r7
+  is le
+    ldi r6, 0x0001
+  fi
+
+  rts
 
 end

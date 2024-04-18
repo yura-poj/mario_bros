@@ -46,14 +46,15 @@ move_earth_enemies: ext
 set_coordinates: ext
 move_sky_enemies: ext
 get_triggers: ext
-main>
+check: ext
+main>  
+  jsr set_coordinates
   ldi r0, 0x0001
   ldi r1, 0xff00
   ldi r2, 0xff01
   ldi r3, 0x0001
   stb r1, r3
   stb r2, r3
-  jsr set_coordinates
   while 
     tst r0  
   stays gt
@@ -72,6 +73,7 @@ main>
     inc r2
     st r1, r2
     rts
+
 end.
 
 
