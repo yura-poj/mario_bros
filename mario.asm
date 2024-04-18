@@ -3,13 +3,20 @@ rsect mario
 move_mario>
   push r0
 
-    ldi r0, 0xffee # left right
-    ldi r1,0xffef # up down
-    ldi r2, 0xfff0 # mario x
-    ldi r3, 0xfff1 # mario y
+    ldi r0, 0xfefe # left right
+    ldi r1,0xfeff # up down
+    ldi r2, 0xff00 # mario x
+    ldi r3, 0xff01 # mario y
 
     ldw r0, r0
     ldb r1, r1
+    ldi r5, 0x00ff
+    if # if r1 is 00ff change it to ffff 
+      cmp r1,r5
+    is eq
+      ldi r1, 0xffff
+    fi
+
     ldb r2,r2
     ldb r3,r3
 
@@ -32,8 +39,8 @@ move_mario>
       move r0, r2
     fi
 
-    ldi r4, 0xfff0 # mario x
-    st r4, r2
+    ldi r4, 0xff00 # mario x
+    stb r4, r2
 
 
     ldi r2, 0x0001
@@ -77,8 +84,8 @@ move_mario>
       ldi r5 , 0x0001 #set r5 for trigger
     fi
 
-    ldi r5, 0xfff1 # mario y
-    st r5, r3
+    ldi r5, 0xff01 # mario y
+    stb r5, r3
     pop r0
 
     rts

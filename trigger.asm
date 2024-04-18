@@ -19,13 +19,13 @@ get_triggers>
     fi
   fi
 
-  ldi r1, 0xfff2
-  ldi r2, 0xfffa
+  ldi r1, 0xff02
+  ldi r2, 0xff0c
   
-  ldi r3, 0xfff0 #mario x
+  ldi r3, 0xff00 #mario x
   ldb r3,r3 
 
-  ldi r4, 0xfff1 #mario y
+  ldi r4, 0xff01 #mario y
   ldb r4,r4
 
   while
@@ -43,27 +43,27 @@ get_triggers>
         sub r1, r2
         
         ldi r5, 0x002e
-        st r2, r5
+        stb r2, r5
 
         inc r2
         ldi r5, 0x001f
-        st r2, r5
+        stb r2, r5
       else
         #game over
         ldi r5, 1
         while 
           tst r5
         stays gt
-          ldi r4, 0xfff1
+          ldi r4, 0xff01
           ldb r4, r5
           inc r5
-          st r4,r5
+          stb r4,r5
         wend
       fi
 
     fi
 
-    ldi r2, 0xfffb
+    ldi r2, 0xff0c
   wend
 
   pop r0

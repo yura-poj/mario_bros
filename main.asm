@@ -47,8 +47,8 @@ set_coordinates: ext
 get_triggers: ext
 main>
   ldi r0, 0x0001
-  ldi r1, 0xfff0
-  ldi r2, 0xfff1
+  ldi r1, 0xff00
+  ldi r2, 0xff01
   ldi r3, 0x0001
   stb r1, r3
   stb r2, r3
@@ -60,7 +60,6 @@ main>
     jsr move_enemies
     jsr get_triggers
   wend
-
 
   halt
 end.
