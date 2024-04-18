@@ -10,7 +10,7 @@ set_coordinates>
   ldi r4, 0x001f
   while
     cmp r0, r1
-  stays le
+  stays lt
     stb r0, r2
     inc r0
     stb r0, r4

@@ -38,7 +38,8 @@ get_triggers>
     is gt
       if
         tst r0
-      is gt
+      is gt #mario kill enemy
+        jsr inc_points
         ldi r2, 0x0002
         sub r1, r2
         
@@ -112,8 +113,22 @@ get_triggers>
       ldi r2, 0
     fi
 
-    and r6, r2 #res
+    and r6, r2 #res if r2  = 1 => mario trigger with enemy
 
     pop r6
+    rts
+  
+  inc_points:
+    push r0
+    push r1
+    push r2
+    ldi r1, 0xff0f
+    ld r1,r2
+    ldi r0, 0x0010
+    add r0, r2
+    st r1, r2
+    pop r2
+    pop r1
+    pop r0
     rts
 end

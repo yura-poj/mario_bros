@@ -56,12 +56,20 @@ main>
   while 
     tst r0  
   stays gt
+    jsr inc_points
     jsr move_mario
     jsr move_enemies
     jsr get_triggers
   wend
 
   halt
+
+  inc_points:
+    ldi r1, 0xff0f
+    ld r1,r2
+    inc r2
+    st r1, r2
+    rts
 end.
 
 
