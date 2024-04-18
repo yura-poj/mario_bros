@@ -42,8 +42,9 @@ default_handler> halt
 # Main program section 
 rsect main 
 move_mario: ext
-move_enemies: ext
+move_earth_enemies: ext
 set_coordinates: ext
+move_sky_enemies: ext
 get_triggers: ext
 main>
   ldi r0, 0x0001
@@ -58,7 +59,8 @@ main>
   stays gt
     jsr inc_points
     jsr move_mario
-    jsr move_enemies
+    jsr move_earth_enemies
+    jsr move_sky_enemies
     jsr get_triggers
   wend
 
