@@ -5,7 +5,7 @@ set_coordinates>
 
   ldi r0, 0xff02
   ldi r1, 0xff0c
-  ldi r2, 0x0002 #start point x
+  ldi r2, 0x0010 #start point x
   ldi r3, 0x0009
   ldi r4, 0x001f
   while

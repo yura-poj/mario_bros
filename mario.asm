@@ -54,26 +54,27 @@ move_mario>
 
 
     ldi r2, 0x0001
-    #check y = 1
+    #check jump = 1 and y = 2
     if
       cmp r1, r2
     is eq
+      ldi r2, 0x0002
       if
         cmp r3, r2
       is eq
-        jsr set_up_r6
+        ldi r6, 0x0001
       fi
       #check y - 1= map
       ldi r5, 0xff00 #mario x
-      ld r5,r5
-      ldi r7, 0xff00 #mario y
-      ld r7, r7
+      ldb r5,r5
+      ldi r7, 0xff01 #mario y
+      ldb r7, r7
       dec r7
       jsr check_pixel
       if
         tst r7
       is gt
-        jsr set_up_r6
+        ldi r6, 0x0001
       fi
     fi
 
@@ -82,6 +83,20 @@ move_mario>
     if
       cmp r6, r1
     is ge
+      ldi r6, 0x0000
+    fi
+    #set r6 = 0 if pixel above
+    ldi r5, 0xff00 #mario x
+    ldb r5,r5
+    ldi r7, 0xff01 #mario y + 3
+    ldi r2, 3
+    ldb r7, r7
+    add r2,r7
+    jsr check_pixel
+    #i f map
+    if
+      tst r7
+    is gt
       ldi r6, 0x0000
     fi
 
@@ -95,13 +110,14 @@ move_mario>
     fi
 
     #decrise y of mario
+    ldi r2, 0x0002
     ldi r5, 0x0000
     if
       cmp r3, r2
     is gt
       ldi r5, 0xff00 #mario x
       ld r5,r5
-      ldi r7, 0xff00 #mario y
+      ldi r7, 0xff01 #mario y
       ld r7, r7
       dec r7
       jsr check_pixel
@@ -120,21 +136,5 @@ move_mario>
     pop r0
 
     rts
-
-set_up_r6:
-  ldi r5, 0xff00 #mario x
-  ld r5,r5
-  ldi r7, 0xff00 #mario y + 3
-  ldi r2, 3
-  ld r7, r7
-  add r2,r7
-  #i f map
-  if
-    tst r7
-  is le
-    ldi r6, 0x0001
-  fi
-
-  rts
 
 end
