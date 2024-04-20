@@ -53,7 +53,7 @@ main>
   ldi r0, 0x0001
   ldi r1, 0xff00
   ldi r2, 0xff01
-  ldi r3, 0x000f
+  ldi r3, 0x0002
   stb r1, r3
   stb r2, r3
   while 
