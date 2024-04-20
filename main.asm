@@ -43,16 +43,17 @@ default_handler> halt
 rsect main 
 move_mario: ext
 move_earth_enemies: ext
-set_coordinates: ext
 move_sky_enemies: ext
+set_coordinates: ext
 get_triggers: ext
-check: ext
-main>  
+set_up: ext
+main>
+  jsr set_up
   jsr set_coordinates
   ldi r0, 0x0001
   ldi r1, 0xff00
   ldi r2, 0xff01
-  ldi r3, 0x0002
+  ldi r3, 0x000f
   stb r1, r3
   stb r2, r3
   while 

@@ -20,7 +20,7 @@ get_triggers>
   fi
 
   ldi r1, 0xff02
-  ldi r2, 0xff0c
+  ldi r2, 0xff0a
   
   ldi r3, 0xff00 #mario x
   ldb r3,r3 
@@ -63,7 +63,7 @@ get_triggers>
       fi
 
     fi
-
+    inc r1
     ldi r2, 0xff0c
   wend
 

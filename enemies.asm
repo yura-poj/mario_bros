@@ -1,11 +1,13 @@
 rsect enemies
 
+check_under_pixel: ext
+
 set_coordinates>
   push r0
 
   ldi r0, 0xff02
   ldi r1, 0xff0c
-  ldi r2, 0x0010 #start point x
+  ldi r2, 0x0030 #start point x
   ldi r3, 0x0009
   ldi r4, 0x001f
   while
@@ -82,7 +84,7 @@ move_sky_enemies>
 move_earth_enemies>
   push r0
   ldi r0, 0xff06
-  ldi r1, 0xff0c
+  ldi r1, 0xff0a
   ldi r4, 2
 
   while
