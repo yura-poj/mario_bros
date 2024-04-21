@@ -3,6 +3,24 @@ rsect map
 move_earth_enemies: ext
 move_sky_enemies: ext
 
+macro popit/0
+  pop r6
+  pop r4
+  pop r3
+  pop r2
+  pop r1
+  pop r0
+mend
+
+macro pushit/0
+  push r0
+  push r1
+  push r2
+  push r3
+  push r4
+  push r6
+mend
+
 set_up>
   #set number of colums = 0
   ldi r0, 0
@@ -30,6 +48,7 @@ set_up>
   rts
 
 check_pixel>
+  pushit
   #r5 - x
   #r7 - y
   #r7 - will have answer if r7 = 1 pixil is here 0 = otherwise
@@ -47,9 +66,11 @@ check_pixel>
   else
     ldi r7,0
   fi
+  popit
   rts
 
 check_under_pixel>
+  pushit
   #r5 - x
   #r7 - y
   #r7 - will have answer if r7 = 1 pixil is here 0 = otherwise
@@ -67,6 +88,7 @@ check_under_pixel>
   else
     ldi r7,0
   fi
+  popit
   rts
 
 move_map>
@@ -111,5 +133,5 @@ move_enemies:
   rts
 
 number: ds 1
-columns: dc 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+columns: dc 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18
 end

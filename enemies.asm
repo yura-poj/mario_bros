@@ -1,5 +1,6 @@
 rsect enemies
 
+check_pixel: ext
 check_under_pixel: ext
 
 set_coordinates>
@@ -7,7 +8,7 @@ set_coordinates>
 
   ldi r0, 0xff02
   ldi r1, 0xff0c
-  ldi r2, 0x0010 #start point x
+  ldi r2, 0x0020 #start point x
   ldi r3, 0x0009
   ldi r4, 0x001f
   while
@@ -117,6 +118,10 @@ move_earth_enemies>
   ldi r0, 0xff06
   ldi r1, 0xff0a
   ldi r4, 2
+  
+  ldi r3, 0xffff
+  jsr check_map_left
+  jsr check_map_right
 
   while
     cmp r0, r1
@@ -126,10 +131,13 @@ move_earth_enemies>
     if
       tst r2 #bigger than 0
     is gt 
-      ldi r3, 0xffff
       add r3, r2 #decrise r2
     else
       ldi r2, 0x002e #el se set enemy to new coordinate
+      inc r0
+      ldi r3, 0x001f
+      st r0, r3
+      dec r0
     fi
 
     stb r0,r2
@@ -139,9 +147,19 @@ move_earth_enemies>
 
     if
       cmp r2, r4 #bigger than 2
-    is gt 
-      ldi r3, 0xfffe
-      add r3, r2 #decrise r2
+    is gt
+      move r2, r7
+      dec r7
+      dec r0
+      ldb r0, r5
+      inc r0
+      jsr check_pixel
+      if 
+        tst r7
+      is le
+        ldi r3, 0xfffa
+        add r3, r2 #decrise r2
+      fi
     fi
 
     stb r0,r2
@@ -149,6 +167,37 @@ move_earth_enemies>
 
   wend
   pop r0
+  rts
+
+
+check_map_left:
+  move r2, r5
+  dec r5
+  inc r0
+  ldb r0, r7
+  dec r7
+  dec r0
+  jsr check_pixel
+  if 
+    tst r7
+  is le
+    ldi r3, 1
+  fi
+  rts
+
+check_map_right:
+  move r2, r5
+  inc r5
+  inc r0
+  ldb r0, r7
+  dec r7
+  dec r0
+  jsr check_pixel
+  if 
+    tst r7
+  is le
+    ldi r3, 0xffff
+  fi
   rts
 
 end
