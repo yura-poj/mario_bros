@@ -8,9 +8,9 @@ set_coordinates>
 
   ldi r0, 0xff02
   ldi r1, 0xff0c
-  ldi r2, 0x0020 #start point x
+  ldi r2, 0x0002 #start point x
   ldi r3, 0x0009
-  ldi r4, 0x001f
+  ldi r4, 0x001a
   while
     cmp r0, r1
   stays lt
@@ -27,9 +27,9 @@ move_sky_enemies>
   push r0
   ldi r0, 0xff02
   ldi r1, 0xff06
-  ldi r4, 3
+  ldi r4, 1
   ldi r5, 0xff00
-  ldb r5, r5 #mario x + 3 
+  ldb r5, r5 #mario x + 1
   add r4, r5
 
   ldi r4, 2
@@ -67,7 +67,7 @@ move_sky_enemies>
       stb r0,r2
 
       inc r0 
-      ldi r2, 0x001f
+      ldi r2, 0x001b
     fi
     
 
@@ -109,7 +109,7 @@ delete_sky_enemy:
   ldi r3, 0x002e #set new enemy x
   stb r0, r3
   inc r0
-  ldi r3, 0x001f #set new enemy y
+  ldi r3, 0x001b #set new enemy y
   stb r0, r3
   rts
 
@@ -137,7 +137,7 @@ move_earth_enemies>
     else
       ldi r2, 0x002e #el se set enemy to new coordinate
       inc r0
-      ldi r3, 0x001f
+      ldi r3, 0x001b
       st r0, r3
       dec r0
     fi

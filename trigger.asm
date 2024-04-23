@@ -88,6 +88,8 @@ get_triggers>
       cmp r5, r2
     is le
       ldi r6, 1
+    else 
+    ldi r6, 0
     fi
 
     inc r1
