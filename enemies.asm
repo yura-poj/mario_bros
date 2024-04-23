@@ -119,15 +119,17 @@ move_earth_enemies>
   ldi r1, 0xff0a
   ldi r4, 2
   
-  ldi r3, 0xffff
-  jsr check_map_left
-  jsr check_map_right
 
   while
     cmp r0, r1
   stays lt
     #перебираем всех наземных врагов
     ldb r0, r2 #set r2 as x of enemy
+
+    ldi r3, 0xffff #set up -1 or 1 
+    jsr check_map_left
+    jsr check_map_right
+
     if
       tst r2 #bigger than 0
     is gt 
@@ -143,7 +145,7 @@ move_earth_enemies>
     stb r0,r2
 
     inc r0
-    ldb r0, r2 #set r0 as y of enemy
+    ldb r0, r2 #set r2 as y of enemy
 
     if
       cmp r2, r4 #bigger than 2
