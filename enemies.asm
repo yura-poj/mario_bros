@@ -118,7 +118,6 @@ move_earth_enemies>
   ldi r0, 0xff06
   ldi r1, 0xff0a
   ldi r4, 2
-  
 
   while
     cmp r0, r1
@@ -126,9 +125,17 @@ move_earth_enemies>
     #перебираем всех наземных врагов
     ldb r0, r2 #set r2 as x of enemy
 
-    ldi r3, 0xffff #set up -1 or 1 
+    ldi r5, 0xff06
+    sub r0, r5
+    ldi r3, enemy_one 
+    add r3, r5
+
+    ld r5,r3
+
     jsr check_map_left
     jsr check_map_right
+
+    st r5, r3
 
     if
       tst r2 #bigger than 0
@@ -173,6 +180,8 @@ move_earth_enemies>
 
 
 check_map_left:
+  push r5
+
   move r2, r5
   dec r5
   inc r0
@@ -185,9 +194,11 @@ check_map_left:
   is le
     ldi r3, 1
   fi
+  pop r5
   rts
 
 check_map_right:
+  push r5
   move r2, r5
   inc r5
   inc r0
@@ -200,6 +211,10 @@ check_map_right:
   is le
     ldi r3, 0xffff
   fi
+  pop r5
   rts
+
+enemy_one: dc 1
+enemy_two: dc 1
 
 end
