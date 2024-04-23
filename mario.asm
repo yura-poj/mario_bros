@@ -18,8 +18,8 @@ move_mario>
   jsr increase_y
   jsr decrease_y
     
-  ldi r5, 0xff01 # mario y
-  stb r5, r3 #store y
+  ldi r4, 0xff01 # mario y
+  stb r4, r3 #store y
   pop r0
 
   rts
