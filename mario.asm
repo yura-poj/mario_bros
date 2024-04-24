@@ -94,7 +94,7 @@ check_y_and_jump:
     ldi r2, 0x0002
     if
       cmp r3, r2
-    is eq
+    is le
       ldi r6, 0x0001
     fi
     #check y - 1= map
@@ -113,8 +113,8 @@ check_y_and_jump:
   rts
 
 decline_jump_if:
-  #set r6 = 0 if r6 =4
-  ldi r1, 0x0004
+  #set r6 = 0 if r6 =5
+  ldi r1, 0x0005
   if
     cmp r6, r1
   is ge
@@ -150,17 +150,17 @@ increase_y:
   rts
 decrease_y:
   ldi r2, 0x0002
-  ldi r5, 0x0000
   if
     cmp r3, r2
   is gt
     ldi r5, 0xff00 #mario x
-    ld r5,r5
+    ldb r5,r5
     ldi r7, 0xff01 #mario y
-    ld r7, r7
+    ldb r7, r7
     dec r7
     jsr check_pixel
     #i f map
+    ldi r5, 0x0000
     if # if r7 > 0 
       tst r7
     is le #fall if doesnt have map

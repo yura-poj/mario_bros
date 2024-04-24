@@ -109,7 +109,7 @@ delete_sky_enemy:
   ldi r3, 0x002e #set new enemy x
   stb r0, r3
   inc r0
-  ldi r3, 0x001b #set new enemy y
+  ldi r3, 0x001a #set new enemy y
   stb r0, r3
   rts
 
@@ -144,7 +144,7 @@ move_earth_enemies>
     else
       ldi r2, 0x002e #el se set enemy to new coordinate
       inc r0
-      ldi r3, 0x001b
+      ldi r3, 0x001a
       st r0, r3
       dec r0
     fi

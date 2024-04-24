@@ -59,6 +59,14 @@ check_pixel>
   shl r1
   add r1, r2
   ldb r2, r2
+
+  ldi r5, 1
+  if
+    cmp r5, r7
+  is eq
+    ldi r7, 0
+  fi
+
   if
     cmp r2, r7
   is eq
