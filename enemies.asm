@@ -13,7 +13,7 @@ set_coordinates>
 
   ldi r0, 0xfe02
   ldi r1, 0xfe06
-  ldi r2, 0x0002 #start point x
+  ldi r2, 0x0014 #start point x
   ldi r3, 0x0009
   ldi r4, 0x001a
   while
@@ -154,7 +154,7 @@ move_earth_enemies>
   else
     ldi r2, 0x0020 #el se set enemy to new coordinate
     inc r0
-    ldi r3, 0x001a
+    ldi r3, 0x0016
     st r0, r3
     dec r0
   fi
@@ -165,7 +165,7 @@ move_earth_enemies>
   is lt
     ldi r2, 0x0020 #el se set enemy to new coordinate
     inc r0
-    ldi r3, 0x001a
+    ldi r3, 0x0016
     st r0, r3
     dec r0
   fi
