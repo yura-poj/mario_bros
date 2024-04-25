@@ -135,6 +135,17 @@ move_earth_enemies>
     dec r0
   fi
 
+  ldi r3, 0x0090
+  if
+    cmp r3, r2
+  is lt
+    ldi r2, 0x0020 #el se set enemy to new coordinate
+    inc r0
+    ldi r3, 0x001a
+    st r0, r3
+    dec r0
+  fi
+
   stb r0,r2
 
   inc r0
