@@ -64,6 +64,7 @@ main>
     jsr move_sky_enemies
     jsr move_mario
     jsr get_triggers
+    jsr update_screen
   wend
 
   halt
@@ -75,6 +76,23 @@ main>
     st r1, r2
     rts
 
+  update_screen:
+    ldi r1, 0xfe00
+    ldi r2, 0xff00
+    ldi r3, 0
+    ldi r4, 7
+    while
+      cmp r3,r4
+    stays lt
+      ldb r1, r5
+      st r2, r5
+
+      inc r1
+      inc r2
+      inc r3
+    wend
+
+    rts
 end.
 
 

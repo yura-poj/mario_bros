@@ -10,7 +10,7 @@ move_mario>
   jsr check_x_less
   jsr check_x_bigger
 
-  ldi r4, 0xff00 # mario x
+  ldi r4, 0xfe00 # mario x
   stb r4, r2 #store mario x
 
   jsr check_y_and_jump
@@ -18,7 +18,7 @@ move_mario>
   jsr increase_y
   jsr decrease_y
     
-  ldi r4, 0xff01 # mario y
+  ldi r4, 0xfe01 # mario y
   stb r4, r3 #store y
   pop r0
 
@@ -27,8 +27,8 @@ move_mario>
 prepare:
   ldi r0, 0xfefe # left right
   ldi r1,0xfeff # up down
-  ldi r2, 0xff00 # mario x
-  ldi r3, 0xff01 # mario y
+  ldi r2, 0xfe00 # mario x
+  ldi r3, 0xfe01 # mario y
 
   ldb r0, r0
   ldb r1, r1
@@ -98,9 +98,9 @@ check_y_and_jump:
       ldi r6, 0x0001
     fi
     #check y - 1= map
-    ldi r5, 0xff00 #mario x
+    ldi r5, 0xfe00 #mario x
     ldb r5,r5
-    ldi r7, 0xff01 #mario y
+    ldi r7, 0xfe01 #mario y
     ldb r7, r7
     dec r7
     jsr check_pixel
@@ -121,9 +121,9 @@ decline_jump_if:
     ldi r6, 0x0000
   fi
   #set r6 = 0 if pixel above
-  ldi r5, 0xff00 #mario x
+  ldi r5, 0xfe00 #mario x
   ldb r5,r5
-  ldi r7, 0xff01 #mario y + 3
+  ldi r7, 0xfe01 #mario y + 3
   ldi r2, 3
   ldb r7, r7
   add r2,r7
@@ -155,9 +155,9 @@ decrease_y:
   if
     cmp r3, r2
   is gt
-    ldi r5, 0xff00 #mario x
+    ldi r5, 0xfe00 #mario x
     ldb r5,r5
-    ldi r7, 0xff01 #mario y
+    ldi r7, 0xfe01 #mario y
     ldb r7, r7
     dec r7
     jsr check_pixel

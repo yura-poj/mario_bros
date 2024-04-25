@@ -19,13 +19,13 @@ get_triggers>
     fi
   fi
 
-  ldi r1, 0xff02
-  ldi r2, 0xff0a
+  ldi r1, 0xfe02
+  ldi r2, 0xfe06
   
-  ldi r3, 0xff00 #mario x
+  ldi r3, 0xfe00 #mario x
   ldb r3,r3 
 
-  ldi r4, 0xff01 #mario y
+  ldi r4, 0xfe01 #mario y
   ldb r4,r4
 
   while
@@ -43,11 +43,11 @@ get_triggers>
         ldi r2, 0x0001
         sub r1, r2
         
-        ldi r5, 0x002e
+        ldi r5, 0x0020
         stb r2, r5
 
         inc r2
-        ldi r5, 0x001f
+        ldi r5, 0x001a
         stb r2, r5
       else
         #game over
@@ -64,7 +64,7 @@ get_triggers>
 
     fi
     inc r1
-    ldi r2, 0xff0c
+    ldi r2, 0xfe06
   wend
 
   pop r0

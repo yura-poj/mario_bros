@@ -125,14 +125,14 @@ move_map>
   rts
 
 move_enemies:
-  ldi r0, 0xff02
-  ldi r1, 0xff0a
+  ldi r0, 0xfe02
+  ldi r1, 0xfe06
   ldi r4, 2
 
   while
     cmp r0, r1
   stays lt
-    #перебираем всех наземных врагов
+    #перебираем всех  врагов
     ldb r0, r2 #set r2 as x of enemy
     dec r2
     stb r0, r2
