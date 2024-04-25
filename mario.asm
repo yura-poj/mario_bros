@@ -2,10 +2,14 @@ rsect mario
 
 check_pixel: ext
 move_map: ext
+check_for_wall: ext
+
 
 move_mario>
   push r0
   jsr prepare 
+  jsr check_wall_left
+  jsr check_wall_right
   jsr check_x_bigger_half_map
   jsr check_x_less
   jsr check_x_bigger
@@ -49,6 +53,35 @@ prepare:
 
 
   add r0,r2
+  rts
+
+check_wall_left:
+  move r2, r5
+  dec r5
+  move r3, r7
+  jsr check_for_wall
+  if 
+    tst r7
+  is gt
+    sub r2,r0
+    move r0, r2
+  fi
+
+  rts
+
+check_wall_right:
+  move r2, r5
+  ldi r7, 1
+  add r7,r5
+  move r3, r7
+  jsr check_for_wall
+  if 
+    tst r7
+  is gt
+    sub r2,r0
+    move r0, r2
+  fi
+
   rts
 
 check_x_less:

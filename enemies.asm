@@ -2,9 +2,14 @@ rsect enemies
 
 check_pixel: ext
 check_under_pixel: ext
+check_for_wall: ext
 
 set_coordinates>
   push r0
+
+  ldi r3, drop_trigger
+  ldi r5, 0
+  st r3, r5
 
   ldi r0, 0xfe02
   ldi r1, 0xfe06
@@ -31,13 +36,28 @@ move_sky_enemies>
   ldb r5, r5 #mario x + 1
   add r4, r5
 
-  ldi r4, 2
-
   ldb r0, r2 #set r2 as x of enemy
   #i f mario under enemy = enemy will drop
+
   if
     cmp r2, r5
   is le
+    ldi r5, 1
+    ldi r4, drop_trigger
+    st r4, r5
+  else
+    ldi r5, 0
+  fi
+
+  ldi r4, drop_trigger
+  ld r4,r4
+  or r4, r5
+
+  ldi r4, 2
+
+  if
+    tst r5
+  is gt
     inc r0 
     ldb r0, r2 #set r2 as y of enemy
     if
@@ -105,6 +125,9 @@ delete_sky_enemy:
   inc r0
   ldi r3, 0x001a #set new enemy y
   stb r0, r3
+  ldi r3, drop_trigger
+  ldi r5, 0
+  st r3, r5
   rts
 
 move_earth_enemies>
@@ -118,6 +141,7 @@ move_earth_enemies>
   ldi r5, enemy_one 
   ld r5,r3
 
+  jsr check_wall_left
   jsr check_map_left
   jsr check_map_right
 
@@ -193,6 +217,23 @@ check_map_left:
   pop r5
   rts
 
+check_wall_left:
+  push r5
+
+  move r2, r5
+  dec r5
+  inc r0
+  ldb r0, r7
+  dec r0
+  jsr check_for_wall
+  if 
+    tst r7
+  is gt
+    ldi r3, 1
+  fi
+  pop r5
+  rts
+
 check_map_right:
   push r5
   move r2, r5
@@ -211,6 +252,6 @@ check_map_right:
   rts
 
 enemy_one: dc 1
-enemy_two: dc 1
+drop_trigger: dc 1
 
 end

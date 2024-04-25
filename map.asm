@@ -99,6 +99,50 @@ check_under_pixel>
   popit
   rts
 
+check_for_wall>
+  pushit
+  #r5 - x
+  #r7 - y
+  #r7 - will have answer if r7 = 1 pixil is here 0 = otherwise
+  ldi r1,number
+  ldb r1,r1
+  add r5, r1 #r1 = number + x
+  ldi r2, columns
+  shl r1
+  add r1, r2
+  ldb r2, r2
+
+  ldi r5, 1
+  if
+    cmp r5, r2
+  is eq
+    ldi r2, 0
+  fi
+
+  ldi r5, 2
+  add r7, r5
+
+
+  if
+    cmp r2, r5
+  is le
+    ldi r5, 1
+  else
+    ldi r5,0
+  fi
+
+  if
+    cmp r2, r7
+  is ge
+    ldi r7,1
+  else
+    ldi r7,0
+  fi
+
+  and r5,r7
+  popit
+  rts
+
 move_map>
   pushit
 
@@ -141,5 +185,5 @@ move_enemies:
   rts
 
 number: ds 1
-columns: dc 7, 7, 7, 7, 7, 7, 7, 7, 7, 1, 1, 1, 1, 1, 1, 1, 7, 7, 7, 7, 1, 1, 1, 1, 1, 1, 1, 1,7, 7, 7, 7, 1, 1, 1, 1, 1, 1, 1, 1,7, 7, 7, 7, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,7, 7, 7, 7, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+columns: dc 7, 7, 7, 7, 7, 7, 7, 7, 7, 1, 1, 1, 1, 1, 1, 1, 2,2,2,3, 3, 3, 4, 4, 4,5,5,5,6,6,6,7,7,7,8,8,8,9,9,9,10,10,10,11,11,11,12,12,12,13,13,14,14,14,15,15,15,1, 1, 1, 1, 1, 1,7, 7, 7, 7, 1, 1, 1, 1, 1, 1, 1, 1,7, 7, 7, 7, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,7, 7, 7, 7, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
 end
