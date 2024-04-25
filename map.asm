@@ -100,7 +100,7 @@ check_under_pixel>
   rts
 
 move_map>
-  push r2
+  pushit
 
   ldi r4, number
   ldi r2, 0x001f
@@ -121,7 +121,7 @@ move_map>
   stb r4, r0 #set tick = 1
 
   jsr move_enemies
-  pop r2
+  popit
   rts
 
 move_enemies:
