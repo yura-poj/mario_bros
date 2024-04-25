@@ -147,6 +147,8 @@ increase_y:
     inc r6
   fi
   
+  ldi r5, 0x0000
+
   rts
 decrease_y:
   ldi r2, 0x0002
