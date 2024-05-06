@@ -79,7 +79,7 @@ main>
   update_screen:
     ldi r1, 0xfe00
     ldi r2, 0xff00
-    ldi r3, 0
+    ldi r3, 0   
     ldi r4, 7
     while
       cmp r3,r4

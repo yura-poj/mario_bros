@@ -141,7 +141,6 @@ move_earth_enemies>
   ldi r5, enemy_one 
   ld r5,r3
 
-  jsr check_wall_left
   jsr check_map_left
   jsr check_map_right
 
@@ -212,23 +211,6 @@ check_map_left:
   if 
     tst r7
   is le
-    ldi r3, 1
-  fi
-  pop r5
-  rts
-
-check_wall_left:
-  push r5
-
-  move r2, r5
-  dec r5
-  inc r0
-  ldb r0, r7
-  dec r0
-  jsr check_for_wall
-  if 
-    tst r7
-  is gt
     ldi r3, 1
   fi
   pop r5
