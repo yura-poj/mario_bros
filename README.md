@@ -1,8 +1,9 @@
-![image](https://github.com/yura-poj/mario_bros/assets/85958170/79b670f4-d88d-4963-950a-42abf2906eb8)![image](https://github.com/yura-poj/mario_bros/assets/85958170/f8d4d2b4-5818-44b6-b4c2-e18c19021ed6)Mario 
+**Platformer game Mario**
 
 ![Online Converter output (1)](https://github.com/yura-poj/mario_bros/assets/85958170/c73ff0c4-7b87-4abf-83b4-24eea0c98b87)
 
-User Manual
+**User Manual**
+
 To run our game, follow these steps:
 1.	Download Logisim from official website: http://www.cburch.com/logisim/download.html
 2.	Install Logisim.
@@ -15,7 +16,8 @@ To run our game, follow these steps:
 
 
 
-Hardware
+**Hardware**
+
 In our project, we have a main circuit called main and 8 sub-schemes:
 
 6 schemes for rendering sprites:
@@ -36,14 +38,29 @@ Under the hood there is a chip scheme that, as we said, renders everything on th
 To the left of the matrix is a clever circuit of comparators that converts the coordinate format from the code to the matrix coordinate format. In assembler the coordinates start at the bottom left corner, while in Logisim they start at the top right corner, so that with this conversion we can display everything correctly on the screen.
 
 Above that we have the scoreboard scheme:
+
+
+
+
+
+
+
+
 <img width="292" alt="image" src="https://github.com/yura-poj/mario_bros/assets/85958170/7c46d583-c979-453b-a699-a804b8b9c6ec">
 
 To make it clearer, here is a schematic diagram of the circuit operation:
+
+
+
+
+
+
 <img width="468" alt="image" src="https://github.com/yura-poj/mario_bros/assets/85958170/be558e02-d0b9-4848-80e8-0d1256914545">
 
 
 
-GAME LOGIC
+**Game Logic**
+
 We decided to implement the entire logic of the game on CdM-16. So, let's first fully understand the logic of the game and then look at its implementation on the CDM-16. We have all the basic elements of a typical platformer: a map with generated obstacles, a main hero, 1 flying enemy and 2 ground enemies. 
 
 It all starts in the main.asm file, which, as you can see from its name, is the main file that sets up an interrupt vector table, handles exceptions, and executes the main game loop which includes initializations, moving game characters (Mario and enemies), processing inputs, and updating the game screen in a game.
@@ -57,7 +74,6 @@ We have 5 files:
 5.	trigger.asm
 
 Let's go through each of the files and take a closer look at how the program is organized.
-![image](https://github.com/yura-poj/mario_bros/assets/85958170/b9671836-8cb5-49db-ada6-88cb7413ab07)
 First, we call the subroutines set_up from map.asm and set_coordinates from enemies.asm.
 The purpose of set_up is to initialise the column values, i.e. map, while set_coordinates places the enemies and the character.
 Secondly, we enter the while loop to execute the game logic. How is it executed? By calling subroutines from helper files. After the first step, we already have a map and placed enemies with character. To start, we increase the score for the player being alive using inc_points.
@@ -79,15 +95,17 @@ In general terms, we have already explained the workings of all five files:
 -	enemies.asm controls enemy placement and movement on the map
 -	last but not least, trigger.asm is responsible for handling collisions between the character and enemies.
 Now we can see the general scheme of the code operation, for clarity we will show it below:
+
 <img width="468" alt="image" src="https://github.com/yura-poj/mario_bros/assets/85958170/293f6133-603d-47f8-8718-5a7ca4c3a380">
 
 CdM-16 communicates with Logisim components by means of 16 registers, the function of which is predetermined in the code.
 
 When we need to write something to a register from CdM-16 we access the memory location at address 0xff00 - 0xff10 and together with the memory the value gets into the register.
 If we need to get a value from Logisim we access the memory location 0xfefe - 0xfeff, but here Logisim intercepts this access and instead of the value in memory it outputs another value, in our case it is the joystick value.
+
 <img width="468" alt="image" src="https://github.com/yura-poj/mario_bros/assets/85958170/c0a6370c-733f-43f6-a9a9-a3b7707daa47">
 
-Conclusion
+**Conclusion**
 
 It was a difficult challenge to make this game in Assembler and Logisim, but it allows us to think more deeply and perhaps create something more global.
 
